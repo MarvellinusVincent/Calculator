@@ -6,14 +6,14 @@ A calculator Andoird app that mimic that of the Iphone calculator in vertical mo
 
 The following **required** functionality is completed:
 
-* [ ] Users sees a user-friendly interface with numbers, arithmetic operations, and others
-* [ ] Users can input numbers with the number buttons
-* [ ] Users can input decimal numbers with the decimal button
-* [ ] Users can perform arithmetic operations with the +, -, X, and / buttons
-* [ ] Users can calculate percentages with the % button
-* [ ] Users can change from positive to negative and vice versa using the +/- button
-* [ ] Users can clear the current input and its history with the C button
-* [ ] Users can see their performed number and/or calculation in the top right hand side (text view)
+* [x] Users sees a user-friendly interface with numbers, arithmetic operations, and others
+* [x] Users can input numbers with the number buttons
+* [x] Users can input decimal numbers with the decimal button
+* [x] Users can perform arithmetic operations with the +, -, X, and / buttons
+* [x] Users can calculate percentages with the % button
+* [x] Users can change from positive to negative and vice versa using the +/- button
+* [x] Users can clear the current input and its history with the C button
+* [x] Users can see their performed number and/or calculation in the top right hand side (text view)
 
 The following **extensions** are implemented:
 
