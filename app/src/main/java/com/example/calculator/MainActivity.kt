@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var operator: String? = null // The operator for the current operation
     private var lastOperation: String? = null // The last performed operation
     private var lastSecondOperand: Double? = null // The second operand for the last performed operation
+    private val TAG = "CalculatorApp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         for (id in numberButtonIds) {
             val button = findViewById<Button>(id)
             button.setOnClickListener {
+                Log.d(TAG, "Button ${button.text} pressed")
                 if (operator == null) {
                     if (currentNumber.toString() == "0") {
                         currentNumber.clear() // Clears the StringBuilder
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         for (id in operationButtonIds) {
             val button = findViewById<Button>(id)
             button.setOnClickListener {
+                Log.d(TAG, "Button ${button.text} pressed")
                 if (operator != null && firstOperand != null) {
                     val secondOperand = currentNumber.toString().toDoubleOrNull()
                     if (secondOperand != null) {
@@ -81,6 +85,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupEqualButton() {
         val equalButton = findViewById<Button>(R.id.buttonEquals)
         equalButton.setOnClickListener {
+            Log.d(TAG, "Button ${equalButton.text} pressed")
             if (firstOperand != null && operator != null) {
                 val secondOperand = currentNumber.toString().toDoubleOrNull()
                 if (secondOperand != null) {
@@ -107,6 +112,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupClearButton() {
         val clearButton = findViewById<Button>(R.id.buttonClear)
         clearButton.setOnClickListener {
+            Log.d(TAG, "Button ${clearButton.text} pressed")
             currentNumber.clear() // Clears the StringBuilder
             currentNumber.append("0")
             firstOperand = null
@@ -119,6 +125,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupDecimalButton() {
         val decimalButton = findViewById<Button>(R.id.buttonDecimal)
         decimalButton.setOnClickListener {
+            Log.d(TAG, "Button ${decimalButton.text} pressed")
             if (!currentNumber.contains(".")) {
                 currentNumber.append(".")
                 updateTopTextView()
@@ -130,6 +137,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupPercentageButton() {
         val percentageButton = findViewById<Button>(R.id.buttonPercentage)
         percentageButton.setOnClickListener {
+            Log.d(TAG, "Button ${percentageButton.text} pressed")
             val value = currentNumber.toString().toDoubleOrNull()
             if (value != null) {
                 val percentageValue = value / 100
@@ -144,6 +152,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupChangePosNegButton() {
         val changePosNeg = findViewById<Button>(R.id.buttonChangePosNeg)
         changePosNeg.setOnClickListener {
+            Log.d(TAG, "Button ${changePosNeg.text} pressed")
             if (currentNumber.isNotEmpty()) {
                 val value = currentNumber.toString().toDouble()
                 currentNumber.clear() // Clears the StringBuilder
