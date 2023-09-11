@@ -1,8 +1,8 @@
 # Calculator
 
-A calculator Andoird app that mimic that of the Iphone calculator in vertical mode, allowing for basic arithmetic calculations
+A calculator Android app that mimic that of the Iphone calculator in vertical mode, allowing for basic arithmetic calculations
 
-## Functionality 
+## Functionality
 
 The following **required** functionality is completed:
 
@@ -15,7 +15,7 @@ The following **required** functionality is completed:
 * [x] Users can clear the current input and its history with the C button
 * [x] Users can see their performed number and/or calculation in the top right hand side (text view)
 * [x] Users can change their orientation from portrait to landscape and vice versa
-* [x] Landscape orientation has additional operations (Log10, ln, sin, cos, and tan) 
+* [x] Landscape orientation has additional operations (Log10, ln, sin, cos, and tan)
 * [x] Whenever the user changes the orientation, the calculator remembers the input that the user had made
 * [x] LogCat is implemented
 * [x] Users can now see a calculator app icon
@@ -33,7 +33,7 @@ The following **extensions** are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='walkthrough.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
+<img src='walkthrough.gif' title='Calculator_project2' width='50%' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
