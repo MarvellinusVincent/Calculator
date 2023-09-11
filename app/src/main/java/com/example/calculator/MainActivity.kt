@@ -14,16 +14,30 @@ import kotlin.math.log10
 import kotlin.math.sin
 import kotlin.math.tan
 
+/**
+ * MainActivity represents the main calculator activity
+ */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tvCalculator: TextView // Displays the calculator input/output
-    private var currentNumber: StringBuilder = StringBuilder() // The current input number
-    private var firstOperand: Double? = null // The first operand for the current operation
-    private var operator: String? = null // The operator for the current operation
-    private var lastOperation: String? = null // The last performed operation
-    private var lastSecondOperand: Double? = null // The second operand for the last performed operation
+    /**
+     * tvCalculator = Displays the calculator input/output
+     * currentNumber = The current input number
+     * firstOperand = The first operand for the current operation
+     * operator = The operator for the current operation
+     * lastOperation = The last performed operation
+     * lastSecondOperand = The second operand for the last performed operation
+     */
+    private lateinit var tvCalculator: TextView
+    private var currentNumber: StringBuilder = StringBuilder()
+    private var firstOperand: Double? = null
+    private var operator: String? = null
+    private var lastOperation: String? = null
+    private var lastSecondOperand: Double? = null
     private val TAG = "CalculatorApp"
 
+    /**
+     * Called when the activity is first created
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,18 +51,12 @@ class MainActivity : AppCompatActivity() {
         setupChangePosNegButton()
         setUpTrig()
         setUpLogs()
-        if (savedInstanceState != null) {
-            // Restore the saved data
-            currentNumber = StringBuilder(savedInstanceState.getString("currentNumber", "0"))
-            operator = savedInstanceState.getString("operator")
-            lastOperation = savedInstanceState.getString("lastOperation")
-            firstOperand = savedInstanceState.getDouble("firstOperand", 0.0)
-            lastSecondOperand = savedInstanceState.getDouble("lastSecondOperand", 0.0)
-            updateTopTextView()
-        }
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+    /**
+     * Called to save the current state of the activity
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("currentNumber", currentNumber.toString())
         outState.putString("operator", operator)
@@ -57,6 +65,9 @@ class MainActivity : AppCompatActivity() {
         outState.putDouble("lastSecondOperand", lastSecondOperand ?: 0.0)
     }
 
+    /**
+     * Called when the activity is restoring its previously saved state
+     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         currentNumber = StringBuilder(savedInstanceState.getString("currentNumber", "0"))
@@ -67,7 +78,9 @@ class MainActivity : AppCompatActivity() {
         updateTopTextView() // Update the TextView to display the restored input
     }
 
-    // Sets up click listeners for the number buttons
+    /**
+     * Sets up click listeners for the number buttons
+     */
     private fun setupNumberButtons() {
         val numberButtonIds = arrayOf(
             R.id.button0, R.id.button1, R.id.button2, R.id.button3,
@@ -90,7 +103,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the operation buttons
+    /**
+     * Sets up click listeners for the operation buttons
+     */
     private fun setupOperationButtons() {
         val operationButtonIds = arrayOf(
             R.id.buttonAdd, R.id.buttonMinus, R.id.buttonMultiply, R.id.buttonDivide)
@@ -116,7 +131,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the equal button
+    /**
+     * Sets up click listeners for the equal button
+     */
     private fun setupEqualButton() {
         val equalButton = findViewById<Button>(R.id.buttonEquals)
         equalButton.setOnClickListener {
@@ -143,7 +160,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the clear button
+    /**
+     * Sets up click listeners for the clear button
+     */
     private fun setupClearButton() {
         val clearButton = findViewById<Button>(R.id.buttonClear)
         clearButton.setOnClickListener {
@@ -156,7 +175,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the decimal button
+    /**
+     * Sets up click listeners for the decimal button
+     */
     private fun setupDecimalButton() {
         val decimalButton = findViewById<Button>(R.id.buttonDecimal)
         decimalButton.setOnClickListener {
@@ -168,7 +189,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the percentage button
+    /**
+     * Sets up click listeners for the percentage button
+     */
     private fun setupPercentageButton() {
         val percentageButton = findViewById<Button>(R.id.buttonPercentage)
         percentageButton.setOnClickListener {
@@ -183,7 +206,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the +/- button
+    /**
+     * Sets up click listeners for the +/- button
+     */
     private fun setupChangePosNegButton() {
         val changePosNeg = findViewById<Button>(R.id.buttonChangePosNeg)
         changePosNeg.setOnClickListener {
@@ -197,7 +222,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the trig functions
+    /**
+     * Sets up click listeners for the trig buttons
+     */
     private fun setUpTrig() {
         val trig = arrayOf(R.id.buttonSin, R.id.buttonCos, R.id.buttonTan)
         for (id in trig) {
@@ -222,7 +249,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up click listeners for the log functions
+    /**
+     * Sets up click listeners for the log buttons
+     */
     private fun setUpLogs() {
         val logs = arrayOf(R.id.buttonLog, R.id.buttonln)
         for (id in logs) {
@@ -246,7 +275,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // The function for performing the operations
+    /**
+     * The function to perform the basic arithmetic operations
+     */
     private fun performOperation(first: Double, second: Double, operator: String): Double {
         return when (operator) {
             "+" -> first + second
@@ -257,7 +288,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // The function to display the output to the StringBuilder
+    /**
+     * The function to display the output to the StringBuilder
+     */
     private fun updateTopTextView() {
         tvCalculator.text = currentNumber.toString()
     }
