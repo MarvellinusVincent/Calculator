@@ -37,6 +37,15 @@ class MainActivity : AppCompatActivity() {
         setupChangePosNegButton()
         setUpTrig()
         setUpLogs()
+        if (savedInstanceState != null) {
+            // Restore the saved data
+            currentNumber = StringBuilder(savedInstanceState.getString("currentNumber", "0"))
+            operator = savedInstanceState.getString("operator")
+            lastOperation = savedInstanceState.getString("lastOperation")
+            firstOperand = savedInstanceState.getDouble("firstOperand", 0.0)
+            lastSecondOperand = savedInstanceState.getDouble("lastSecondOperand", 0.0)
+            updateTopTextView()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
