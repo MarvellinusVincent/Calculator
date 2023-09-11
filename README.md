@@ -14,12 +14,20 @@ The following **required** functionality is completed:
 * [x] Users can change from positive to negative and vice versa using the +/- button
 * [x] Users can clear the current input and its history with the C button
 * [x] Users can see their performed number and/or calculation in the top right hand side (text view)
+* [x] Users can change their orientation from portrait to landscape and vice versa
+* [x] Landscape orientation has additional operations (Log10, ln, sin, cos, and tan) 
+* [x] Whenever the user changes the orientation, the calculator remembers the input that the user had made
+* [x] LogCat is implemented
+* [x] Users can now see a calculator app icon
 
 The following **extensions** are implemented:
 
 * Users see a rounded square button instead of a circular button as the example in the file showed us so
 * Users see a properly formatted result with scientific notations if necessary
 * Like in Iphone, users can perform multiple sequential calculations without needing to press the equal button each time
+* There is now a landscape mode with the data being saved when changed from portrait, vice versa
+* Users can see what button is clicked when user clicks the button
+* Users can see app icon
 
 ## Video Walkthrough
 
@@ -37,6 +45,8 @@ Describe any challenges encountered while building the app.
 * I had to create buttons for each button, Im not sure if there was a better way to do it as it is still new to me, but that took some time
 * The set up code was also a bit difficult to me as I am not used to Kotlin syntax
 * Making the 0 appear after each clear but not appending it to the number after it is typed again (e.g. 06) was a bit confusing at the start
+* The layout didn't want to change even when the orientation is in landscape
+* The data didn't save when the orientation was changed until I deleted a line in the code
 
 ## License
 
