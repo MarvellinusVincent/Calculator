@@ -1,11 +1,18 @@
 package com.example.calculator
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.content.res.Configuration
+import kotlin.math.cos
+import kotlin.math.ln
+import kotlin.math.log10
+import kotlin.math.sin
+import kotlin.math.tan
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,9 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         tvCalculator = findViewById(R.id.tvCalculator)
-
         setupNumberButtons()
         setupOperationButtons()
         setupEqualButton()
@@ -30,6 +35,27 @@ class MainActivity : AppCompatActivity() {
         setupDecimalButton()
         setupPercentageButton()
         setupChangePosNegButton()
+        setUpTrig()
+        setUpLogs()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("currentNumber", currentNumber.toString())
+        outState.putString("operator", operator)
+        outState.putString("lastOperation", lastOperation)
+        outState.putDouble("firstOperand", firstOperand ?: 0.0)
+        outState.putDouble("lastSecondOperand", lastSecondOperand ?: 0.0)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        currentNumber = StringBuilder(savedInstanceState.getString("currentNumber", "0"))
+        operator = savedInstanceState.getString("operator")
+        lastOperation = savedInstanceState.getString("lastOperation")
+        firstOperand = savedInstanceState.getDouble("firstOperand", 0.0)
+        lastSecondOperand = savedInstanceState.getDouble("lastSecondOperand", 0.0)
+        updateTopTextView() // Update the TextView to display the restored input
     }
 
     // Sets up click listeners for the number buttons
@@ -55,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up slick listeners for the operation buttons
+    // Sets up click listeners for the operation buttons
     private fun setupOperationButtons() {
         val operationButtonIds = arrayOf(
             R.id.buttonAdd, R.id.buttonMinus, R.id.buttonMultiply, R.id.buttonDivide)
@@ -81,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up slick listeners for the equal button
+    // Sets up click listeners for the equal button
     private fun setupEqualButton() {
         val equalButton = findViewById<Button>(R.id.buttonEquals)
         equalButton.setOnClickListener {
@@ -108,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up slick listeners for the clear button
+    // Sets up click listeners for the clear button
     private fun setupClearButton() {
         val clearButton = findViewById<Button>(R.id.buttonClear)
         clearButton.setOnClickListener {
@@ -121,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up slick listeners for the decimal button
+    // Sets up click listeners for the decimal button
     private fun setupDecimalButton() {
         val decimalButton = findViewById<Button>(R.id.buttonDecimal)
         decimalButton.setOnClickListener {
@@ -133,7 +159,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up slick listeners for the percentage button
+    // Sets up click listeners for the percentage button
     private fun setupPercentageButton() {
         val percentageButton = findViewById<Button>(R.id.buttonPercentage)
         percentageButton.setOnClickListener {
@@ -148,7 +174,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Sets up slick listeners for the +/- button
+    // Sets up click listeners for the +/- button
     private fun setupChangePosNegButton() {
         val changePosNeg = findViewById<Button>(R.id.buttonChangePosNeg)
         changePosNeg.setOnClickListener {
@@ -158,6 +184,55 @@ class MainActivity : AppCompatActivity() {
                 currentNumber.clear() // Clears the StringBuilder
                 currentNumber.append((-value).toString())
                 updateTopTextView()
+            }
+        }
+    }
+
+    // Sets up click listeners for the trig functions
+    private fun setUpTrig() {
+        val trig = arrayOf(R.id.buttonSin, R.id.buttonCos, R.id.buttonTan)
+        for (id in trig) {
+            val button = findViewById<Button>(id)
+            button?.setOnClickListener {
+                if (button != null) {
+                    Log.d(TAG, "Button ${button.text} pressed")
+                    val value = currentNumber.toString().toDoubleOrNull()
+                    if (value != null) {
+                        val trigValue = when (id) {
+                            R.id.buttonSin -> sin(Math.toRadians(value))
+                            R.id.buttonCos -> cos(Math.toRadians(value))
+                            R.id.buttonTan -> tan(Math.toRadians(value))
+                            else -> 0.0
+                        }
+                        currentNumber.clear() // Clears the StringBuilder
+                        currentNumber.append(trigValue)
+                        updateTopTextView()
+                    }
+                }
+            }
+        }
+    }
+
+    // Sets up click listeners for the log functions
+    private fun setUpLogs() {
+        val logs = arrayOf(R.id.buttonLog, R.id.buttonln)
+        for (id in logs) {
+            val button = findViewById<Button>(id)
+            button?.setOnClickListener {
+                if (button != null) {
+                    Log.d(TAG, "Button ${button.text} pressed")
+                    val value = currentNumber.toString().toDoubleOrNull()
+                    if (value != null) {
+                        val logValue = when (id) {
+                            R.id.buttonLog -> log10(value)
+                            R.id.buttonln -> ln(value)
+                            else -> 0.0
+                        }
+                        currentNumber.clear() // Clears the StringBuilder
+                        currentNumber.append(logValue)
+                        updateTopTextView()
+                    }
+                }
             }
         }
     }
