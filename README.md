@@ -33,7 +33,7 @@ The following **extensions** are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='walkthrough.gif' title='Calculator_project2' width='50%' alt='Video Walkthrough' />
+<img src='Calculator_project2.gif' title='Calculator_project2' width='50%' alt='Video Walkthrough' />
 
 ## Notes
 
